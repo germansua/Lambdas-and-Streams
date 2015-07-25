@@ -7,13 +7,15 @@ package lesson2;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Speakjava (simon.ritter@oracle.com)
@@ -89,8 +91,16 @@ public class Lesson2 {
      * Count the number of lines in the file using the BufferedReader provided
      */
     private void exercise4() throws IOException {
+        URI uriFile;
+        try {
+            uriFile = getClass().getResource("SonnetI.txt").toURI();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Lesson2.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        
         try (BufferedReader reader = Files.newBufferedReader(
-                Paths.get("SonnetI.txt"), StandardCharsets.UTF_8)) {
+                Paths.get(uriFile), StandardCharsets.UTF_8)) {
             /* YOUR CODE HERE */
         }
     }
@@ -102,8 +112,16 @@ public class Lesson2 {
      * HINT: A regular expression, WORD_REGEXP, is already defined for your use.
      */
     private void exercise5() throws IOException {
+        URI uriFile;
+        try {
+            uriFile = getClass().getResource("SonnetI.txt").toURI();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Lesson2.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        
         try (BufferedReader reader = Files.newBufferedReader(
-                Paths.get("SonnetI.txt"), StandardCharsets.UTF_8)) {
+                Paths.get(uriFile), StandardCharsets.UTF_8)) {
             /* YOUR CODE HERE */
         }
     }
@@ -114,8 +132,21 @@ public class Lesson2 {
      * sorted by natural order. Print the contents of the list.
      */
     private void exercise6() throws IOException {
-        try (BufferedReader reader = Files.newBufferedReader(
-                Paths.get("SonnetI.txt"), StandardCharsets.UTF_8)) {
+        
+            //        try (BufferedReader reader = Files.newBufferedReader(
+//                Paths.get("SonnetI.txt"), StandardCharsets.UTF_8)) {
+//            /* YOUR CODE HERE */
+//        }
+        URI uriFile;
+        try {
+            uriFile = getClass().getResource("SonnetI.txt").toURI();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Lesson2.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        
+         try (BufferedReader reader = Files.newBufferedReader(
+                Paths.get(uriFile), StandardCharsets.UTF_8)) {
             /* YOUR CODE HERE */
         }
     }
@@ -124,8 +155,16 @@ public class Lesson2 {
      * Modify exercise6 so that the words are sorted by length
      */
     private void exercise7() throws IOException {
+        URI uriFile;
+        try {
+            uriFile = getClass().getResource("SonnetI.txt").toURI();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Lesson2.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        
         try (BufferedReader reader = Files.newBufferedReader(
-                Paths.get("SonnetI.txt"), StandardCharsets.UTF_8)) {
+                Paths.get(uriFile), StandardCharsets.UTF_8)) {
             /* YOUR CODE HERE */
         }
     }
