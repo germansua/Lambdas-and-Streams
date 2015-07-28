@@ -16,6 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author Speakjava (simon.ritter@oracle.com)
@@ -58,6 +60,17 @@ public class Lesson2 {
                 "The", "Quick", "BROWN", "Fox", "Jumped", "Over", "The", "LAZY", "DOG");
 
         /* YOUR CODE HERE */
+        List<String> newList = list.stream().
+                map(String::toLowerCase).
+                collect(Collectors.toList());
+
+        /* Old list */
+        list.forEach(word -> System.out.print(word + "\t"));
+        System.out.println();
+
+        /* New list, both are printed to depict they're different */
+        newList.forEach(word -> System.out.print(word + "\t"));
+        System.out.println();
     }
 
     /**
@@ -71,6 +84,12 @@ public class Lesson2 {
                 "The", "Quick", "BROWN", "Fox", "Jumped", "Over", "The", "LAZY", "DOG");
 
         /* YOUR CODE HERE */
+        list.stream().
+                map(String::toLowerCase).
+                filter(word -> word.length() % 2 != 0).
+                collect(Collectors.toList()).
+                forEach(word -> System.out.print(word + "\t"));
+        System.out.println();
     }
 
     /**
@@ -85,6 +104,12 @@ public class Lesson2 {
                 "The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog");
 
         /* YOUR CODE HERE */
+        System.out.println(
+                list.stream().
+                skip(1).
+                limit(3).
+                collect(Collectors.joining("-"))
+        );
     }
 
     /**
@@ -98,10 +123,11 @@ public class Lesson2 {
             Logger.getLogger(Lesson2.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
-        
+
         try (BufferedReader reader = Files.newBufferedReader(
                 Paths.get(uriFile), StandardCharsets.UTF_8)) {
             /* YOUR CODE HERE */
+            System.out.println("Number of lines: " + reader.lines().count());
         }
     }
 
@@ -119,10 +145,15 @@ public class Lesson2 {
             Logger.getLogger(Lesson2.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
-        
+
         try (BufferedReader reader = Files.newBufferedReader(
                 Paths.get(uriFile), StandardCharsets.UTF_8)) {
             /* YOUR CODE HERE */
+            reader.lines().
+                    flatMap(line -> Stream.of(line.split(WORD_REGEXP))).
+                    distinct().
+                    forEach(word -> System.out.print(word + "\t"));
+            System.out.println();
         }
     }
 
@@ -132,8 +163,8 @@ public class Lesson2 {
      * sorted by natural order. Print the contents of the list.
      */
     private void exercise6() throws IOException {
-        
-            //        try (BufferedReader reader = Files.newBufferedReader(
+
+        //        try (BufferedReader reader = Files.newBufferedReader(
 //                Paths.get("SonnetI.txt"), StandardCharsets.UTF_8)) {
 //            /* YOUR CODE HERE */
 //        }
@@ -144,10 +175,16 @@ public class Lesson2 {
             Logger.getLogger(Lesson2.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
-        
-         try (BufferedReader reader = Files.newBufferedReader(
+
+        try (BufferedReader reader = Files.newBufferedReader(
                 Paths.get(uriFile), StandardCharsets.UTF_8)) {
             /* YOUR CODE HERE */
+            reader.lines().
+                    flatMap(line -> Stream.of(line.split(WORD_REGEXP))).
+                    distinct().
+                    sorted().
+                    forEach(word -> System.out.print(word + "\t"));
+            System.out.println();
         }
     }
 
@@ -162,10 +199,24 @@ public class Lesson2 {
             Logger.getLogger(Lesson2.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
-        
+
         try (BufferedReader reader = Files.newBufferedReader(
                 Paths.get(uriFile), StandardCharsets.UTF_8)) {
             /* YOUR CODE HERE */
+            reader.lines().
+                    flatMap(line -> Stream.of(line.split(WORD_REGEXP))).
+                    distinct().
+                    sorted((w1, w2) -> {
+                        if (w1.length() == w2.length()) {
+                            return 0;
+                        } else if (w1.length() < w2.length()) {
+                            return -1;
+                        } else {
+                            return 1;
+                        }
+                    }).
+                    forEach(word -> System.out.print(word + "\t"));
+            System.out.println();
         }
     }
 
