@@ -43,8 +43,8 @@ public class RandomWords {
         }
 
         try (BufferedReader reader = Files.newBufferedReader(Paths.get(wordsURI))) {
-            sourceWords = null;    // YOUR CODE HERE
-
+            // YOUR CODE HERE
+            sourceWords = reader.lines().collect(Collectors.toList());
             System.out.println("Loaded " + sourceWords.size() + " words");
         }
     }
