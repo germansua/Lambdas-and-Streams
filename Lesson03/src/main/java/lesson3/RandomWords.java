@@ -7,11 +7,15 @@ package lesson3;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -29,7 +33,16 @@ public class RandomWords {
      * @throws IOException If the source words file cannot be read
      */
     public RandomWords() throws IOException {
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get("words"))) {
+
+        URI wordsURI;
+        try {
+            wordsURI = this.getClass().getResource("words").toURI();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(RandomWords.class.getName()).log(Level.SEVERE, null, ex);
+            throw new IOException(ex);
+        }
+
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get(wordsURI))) {
             sourceWords = null;    // YOUR CODE HERE
 
             System.out.println("Loaded " + sourceWords.size() + " words");
