@@ -17,6 +17,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Class to generate a list of random words
@@ -57,8 +58,12 @@ public class RandomWords {
      */
     public List<String> createList(int listSize) {
         Random rand = new Random();
-        List<String> wordList = null; // YOUR CODE HERE
-
+        // YOUR CODE HERE
+        List<String> wordList
+                = rand.ints(listSize, 0, listSize - 1).
+                peek(System.out::println).
+                mapToObj(i -> sourceWords.get(i)).
+                collect(Collectors.toList());
         return wordList;
     }
 
