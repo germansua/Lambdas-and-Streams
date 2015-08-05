@@ -72,7 +72,9 @@ public class Lesson3 {
         final int LIST_SIZE = wordList.size();
         int[][] distances = new int[LIST_SIZE][LIST_SIZE];
 
-    // YOUR CODE HERE
+        // YOUR CODE HERE
+        wordList.stream();
+
         return distances;
     }
 
@@ -84,7 +86,7 @@ public class Lesson3 {
      * @return The list processed in whatever way you want
      */
     static List<String> processWords(List<String> wordList, boolean parallel) {
-    // YOUR CODE HERE
+        // YOUR CODE HERE
 
         return null;
     }
