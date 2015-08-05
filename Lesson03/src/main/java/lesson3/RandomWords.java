@@ -58,7 +58,7 @@ public class RandomWords {
     public List<String> createList(int listSize) {
         Random rand = new Random();
         // YOUR CODE HERE
-        List<String> wordList = rand.ints(listSize, 0, listSize - 1).
+        List<String> wordList = rand.ints(listSize, 0, sourceWords.size() - 1).
                 mapToObj(i -> sourceWords.get(i)).
                 collect(Collectors.toList());
         return wordList;
