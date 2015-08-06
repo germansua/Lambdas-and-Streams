@@ -7,7 +7,12 @@ package lesson3;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -95,8 +100,14 @@ public class Lesson3 {
      */
     static List<String> processWords(List<String> wordList, boolean parallel) {
         // YOUR CODE HERE
+        Stream<String> stream = parallel ? wordList.parallelStream() : wordList.stream();
 
-        return null;
+        /* Trying sorting */
+//        return stream.sorted().collect(Collectors.toList());
+        /* Trying sorting and filtering */
+//        return stream.sorted().filter(s -> s.length() > 4).collect(Collectors.toList());
+        /* Trying sorting, filtering and mapping */
+        return stream.sorted().filter(s -> s.length() > 4).map(s -> s.toUpperCase()).collect(Collectors.toList());
     }
 
     /**
@@ -112,11 +123,15 @@ public class Lesson3 {
         measure("Sequential", () -> computeLevenshtein(wordList, false));
         measure("Parallel", () -> computeLevenshtein(wordList, true));
 
-//        List<String> wordList2 = fullWordList.createList(2000);
-//
+        /* Trying doubling the size */
+        List<String> wordList2 = fullWordList.createList(2000);
 //        measure("Sequential", () -> computeLevenshtein(wordList2, false));
 //        measure("Parallel", () -> computeLevenshtein(wordList2, true));
+        
         measure("Sequential", () -> processWords(wordList, false));
         measure("Parallel", () -> processWords(wordList, true));
+        /* Trying doubling the size */
+        measure("Sequential", () -> processWords(wordList2, false));
+        measure("Parallel", () -> processWords(wordList2, true));
     }
 }
